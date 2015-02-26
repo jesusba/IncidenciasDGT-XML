@@ -7,12 +7,15 @@ from lxml import etree
 incidencias=etree.parse('http://www.dgt.es/incidenciasXY.xml')
 lista=incidencias.getroot()
 
-for n in xrange(len(lista)):
+listaincidencias=lista.findall("incidencia")
+
+for n in listaincidencias:
 	print " "
-	print "ID Referencia:",lista[n][13].text
-	print "Tipo de incidencia:",lista[n][0].text
-	print "Población:",lista[n][5].text
-	print "Causa:",lista[n][4].text
-	print "Nivel:",lista[n][7].text
-	print "Carretera:",lista[n][8].text
-	print "Sentido:",lista[n][11].text
+	print "ID Referencia:",n.getparent().find("incidencia/ref_incidencia").text	
+	print "Tipo de incidencia:",n.getparent().find("incidencia/tipo").text	
+	print "Población:",n.getparent().find("incidencia/poblacion").text	
+	print "Fecha de inicio:",n.getparent().find("incidencia/fechahora_ini").text	
+	print "Causa:",n.getparent().find("incidencia/causa").text	
+	print "Nivel:",n.getparent().find("incidencia/nivel").text	
+	print "Carretera:",n.getparent().find("incidencia/carretera").text	
+	print "Sentido:",n.getparent().find("incidencia/sentido").text	
